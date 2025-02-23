@@ -10,7 +10,7 @@
     "test": "ava",
     "dev": "pm2-dev start app.js",
     "lint": "eslint ./",
-    "build": "echo 'Building the project...'" // Aquí añadimos el script de build
+    "build": "echo 'Building the project...'" 
   },
   "ava": {
     "serial": true,
