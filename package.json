@@ -8,8 +8,9 @@
     "deploy": "node deploy.js",
     "testdata": "node lib/testdata.js",
     "test": "ava",
-    "dev": " pm2-dev start app.js",
-    "lint": "eslint ./"
+    "dev": "pm2-dev start app.js",
+    "lint": "eslint ./",
+    "build": "echo 'Building the project...'" // Aquí añadimos el script de build
   },
   "ava": {
     "serial": true,
