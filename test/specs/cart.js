@@ -116,7 +116,7 @@ test('[Fail] Add product to cart with not enough stock', async t => {
             productQuantity: 20
         })
         .expect(400);
-    t.deepEqual(res.body.message, 'There is insufficient stock of this product.');
+    t.deepEqual(res.body.message, 'The quantity exceeds the max amount. Please contact us for larger orders.')
 });
 
 test('[Fail] Add incorrect product to cart', async t => {
@@ -127,7 +127,7 @@ test('[Fail] Add incorrect product to cart', async t => {
             productQuantity: 20
         })
         .expect(400);
-    t.deepEqual(res.body.message, 'Error updating cart. Please try again.');
+        t.deepEqual(res.body.message, 'The quantity exceeds the max amount. Please contact us for larger orders.');
 });
 
 test('[Success] Remove item previously added to cart', async t => {
@@ -193,7 +193,7 @@ test('[Fail] Try add more than the variant stock', async t => {
         })
         .expect(400);
 
-    t.deepEqual(addToCart.body.message, 'There is insufficient stock of this product.');
+        t.deepEqual(addToCart.body.message, 'The quantity exceeds the max amount. Please contact us for larger orders.');
 });
 
 test('[Fail] Try hold stock then add more stock than available', async t => {
