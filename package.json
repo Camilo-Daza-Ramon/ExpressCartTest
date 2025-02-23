@@ -10,7 +10,11 @@
     "test": "ava",
     "dev": "pm2-dev start app.js",
     "lint": "eslint ./",
+<<<<<<< HEAD
     "build": "echo 'Building the project...'" 
+=======
+    "build": "echo 'Building the project...'"
+>>>>>>> 75c87f271d34b7181d2b2a62267323fb442eb95a
   },
   "ava": {
     "serial": true,
@@ -125,3 +129,4 @@
     "url": "https://github.com/mrvautin/expressCart/issues"
   }
 }
+
