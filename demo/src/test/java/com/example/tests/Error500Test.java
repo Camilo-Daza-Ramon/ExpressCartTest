@@ -14,7 +14,7 @@ public class Error500Test {
 
     private static final String DRIVER_PATH = "C:\\Users\\CAMILO DAZA\\Desktop\\serverdrivers_selenium\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe";
     private static final String BASE_URL = "http://127.0.0.1:1111";
-    private static final String NAVBAR_BRAND_SELECTOR = ".navbar-brand"; // Selector para el elemento navbar-brand
+    private static final String NAVBAR_BRAND_SELECTOR = ".navbar-brand"; 
 
     @Test
     public void handleServerError() {
@@ -22,25 +22,20 @@ public class Error500Test {
         WebDriver driver = new ChromeDriver();
 
         try {
-            // Simula el error del servidor (Código 500)
+
             driver.get(BASE_URL + "/cause-server-error");
 
-            // Esperar 4 segundos
-            Thread.sleep(4000); // Espera 4 segundos
+            Thread.sleep(4000); 
 
-            // Hacer clic en el elemento navbar-brand
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement navbarBrand = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(NAVBAR_BRAND_SELECTOR)));
             navbarBrand.click();
 
-            // Esperar unos segundos después de hacer clic
-            Thread.sleep(4000); // Espera 4 segundos
+            Thread.sleep(4000); 
 
-            // Provocar nuevamente el error 500
             driver.get(BASE_URL + "/cause-server-error");
 
-            // Esperar unos segundos antes de cerrar
-            Thread.sleep(4000); // Espera 4 segundos
+            Thread.sleep(4000); 
 
         } catch (InterruptedException e) {
             System.out.println("La espera fue interrumpida: " + e.getMessage());

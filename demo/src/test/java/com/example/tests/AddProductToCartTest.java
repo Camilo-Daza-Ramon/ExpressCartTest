@@ -26,31 +26,24 @@ public class AddProductToCartTest {
         try {
             driver.get(BASE_URL);
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3000));  // Incrementa el tiempo de espera
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(300));
 
-            // 1. Esperar 7 segundos para que cargue la página
             Thread.sleep(600);
 
-            // 2. Hacer clic en el botón "Add to cart" inicial
             WebElement initialAddToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_TO_CART_INITIAL_SELECTOR)));
             initialAddToCartButton.click();
 
-            // 3. Esperar 5 segundos para que cargue la página del producto
             Thread.sleep(600);
 
-            // 4. Subir la cantidad de productos de uno a dos
             WebElement quantityInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PRODUCT_QUANTITY_SELECTOR)));
             quantityInput.clear();
             quantityInput.sendKeys("2");
 
-            // 5. Esperar 5 segundos para que cargue la página del producto
             Thread.sleep(600);
 
-            // 6. Hacer clic en el botón "Add to cart" nuevamente
             WebElement addToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_TO_CART_SELECTOR)));
             addToCartButton.click();
 
-            // 7. Esperar 5 segundos para que cargue la página del producto
             Thread.sleep(600);
 
         } catch (InterruptedException e) {
