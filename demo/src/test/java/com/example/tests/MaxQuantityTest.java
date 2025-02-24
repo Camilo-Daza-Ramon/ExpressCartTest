@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,6 +27,7 @@ public class MaxQuantityTest {
     private static final String ADD_TO_CART_SELECTOR = ".btn.btn-primary.btn-block.product-add-to-cart";
     private static final String PRODUCT_QUANTITY_SELECTOR = "#product_quantity";
     private static final int MAX_QUANTITY = 10; 
+    private static final String RESULTS_FILE_PATH = "test-results.txt"; // Archivo de resultados
 
     @Test
     public void verifyMaxQuantityLimit() {
@@ -82,8 +85,13 @@ public class MaxQuantityTest {
             Thread.sleep(2000);
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            logBuilder.append("Test execution error: ").append(e.getMessage()).append("\n");
+            logError("Test execution interrupted", e, logBuilder);
+        } catch (NoSuchElementException e) {
+            logError("Element not found", e, logBuilder);
+        } catch (TimeoutException e) {
+            logError("Operation timed out", e, logBuilder);
+        } catch (Exception e) {
+            logError("Unexpected error occurred", e, logBuilder);
         } finally {
             LocalDateTime endTime = LocalDateTime.now();
             logBuilder.append("Test End Time: ").append(endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
@@ -93,13 +101,18 @@ public class MaxQuantityTest {
         }
     }
 
+    private void logError(String message, Exception e, StringBuilder logBuilder) {
+        logBuilder.append(message).append(": ").append(e.getMessage()).append("\n");
+        e.printStackTrace();
+    }
+
     private void writeLogToFile(String log) {
-        String filePath = "test-results.txt"; // Cambiado a test-results.txt
         try {
-            Files.write(Paths.get(filePath), log.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            Files.write(Paths.get(RESULTS_FILE_PATH), log.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             System.out.println("File written successfully");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
     }
 }
+

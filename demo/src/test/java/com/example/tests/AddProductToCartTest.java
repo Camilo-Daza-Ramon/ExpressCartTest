@@ -12,6 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -51,8 +53,16 @@ public class AddProductToCartTest {
             logEndTime();
             writeLogToFile(RESULTS_FILE_PATH);
 
-        } catch (InterruptedException | IOException e) {
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            logError("Test execution interrupted", e);
+        } catch (NoSuchElementException e) {
+            logError("Element not found", e);
+        } catch (TimeoutException e) {
+            logError("Operation timed out", e);
+        } catch (IOException e) {
+            logError("IO exception occurred", e);
+        } catch (Exception e) {
+            logError("Unexpected error occurred", e);
         }
     }
 
@@ -95,6 +105,11 @@ public class AddProductToCartTest {
         LocalDateTime endTime = LocalDateTime.now();
         logBuilder.append("Test End Time: ").append(endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
         logBuilder.append("Test executed successfully.\n");
+    }
+
+    private void logError(String message, Exception e) {
+        logBuilder.append(message).append(": ").append(e.getMessage()).append("\n");
+        e.printStackTrace();
     }
 
     private void writeLogToFile(String filePath) throws IOException {

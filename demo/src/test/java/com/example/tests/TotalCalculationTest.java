@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,7 +27,8 @@ public class TotalCalculationTest {
     private static final String MENU_BUTTON_SELECTOR = ".menu-btn";
     private static final String CHECKOUT_BUTTON_SELECTOR = ".pushy-link.btn.btn-primary";
     private static final String PRODUCT_QUANTITY_SELECTOR = "#product_quantity";
-    private static final String CART_TOTAL_SELECTOR = "#total-cart-amount"; 
+    private static final String CART_TOTAL_SELECTOR = "#total-cart-amount";
+    private static final String RESULTS_FILE_PATH = "test-results.txt"; // Archivo de resultados
 
     @Test
     public void verifyTotalCalculation() {
@@ -75,9 +78,12 @@ public class TotalCalculationTest {
             checkoutButton.click();
             logBuilder.append("Clicked checkout button.\n");
 
+        } catch (NoSuchElementException e) {
+            logError("Element not found", e, logBuilder);
+        } catch (TimeoutException e) {
+            logError("Operation timed out", e, logBuilder);
         } catch (Exception e) {
-            e.printStackTrace();
-            logBuilder.append("Test execution error: ").append(e.getMessage()).append("\n");
+            logError("Unexpected error occurred", e, logBuilder);
         } finally {
             LocalDateTime endTime = LocalDateTime.now();
             logBuilder.append("Test End Time: ").append(endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
@@ -87,16 +93,17 @@ public class TotalCalculationTest {
         }
     }
 
-    private void writeLogToFile(String log) {
-        String filePath = "test-results.txt"; // Cambiado a test-results.txt
-        try {
-            Files.write(Paths.get(filePath), log.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            System.out.println("File written successfully");
+    private void logError(String message, Exception e, StringBuilder logBuilder) {
+        logBuilder.append(message).append(": ").append(e.getMessage()).append("\n");
+        e.printStackTrace();
+    }
 
+    private void writeLogToFile(String log) {
+        try {
+            Files.write(Paths.get(RESULTS_FILE_PATH), log.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            System.out.println("File written successfully");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
     }
 }
-
-

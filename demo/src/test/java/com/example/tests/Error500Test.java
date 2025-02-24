@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,6 +23,7 @@ public class Error500Test {
     private static final String DRIVER_PATH = "C:\\Users\\CAMILO DAZA\\Desktop\\serverdrivers_selenium\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe";
     private static final String BASE_URL = "http://127.0.0.1:1111";
     private static final String NAVBAR_BRAND_SELECTOR = ".navbar-brand"; 
+    private static final String RESULTS_FILE_PATH = "test-results.txt"; // Archivo de resultados
 
     @Test
     public void handleServerError() {
@@ -52,9 +55,13 @@ public class Error500Test {
             Thread.sleep(4000); 
 
         } catch (InterruptedException e) {
-            logBuilder.append("La espera fue interrumpida: ").append(e.getMessage()).append("\n");
+            logError("Test execution interrupted", e, logBuilder);
+        } catch (NoSuchElementException e) {
+            logError("Element not found", e, logBuilder);
+        } catch (TimeoutException e) {
+            logError("Operation timed out", e, logBuilder);
         } catch (Exception e) {
-            logBuilder.append("Error durante la ejecución del test: ").append(e.getMessage()).append("\n");
+            logError("Unexpected error occurred", e, logBuilder);
         } finally {
             LocalDateTime endTime = LocalDateTime.now();
             logBuilder.append("Test End Time: ").append(endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
@@ -64,10 +71,14 @@ public class Error500Test {
         }
     }
 
+    private void logError(String message, Exception e, StringBuilder logBuilder) {
+        logBuilder.append(message).append(": ").append(e.getMessage()).append("\n");
+        e.printStackTrace();
+    }
+
     private void writeLogToFile(String log) {
-        String filePath = "test-results.txt"; // Cambiado a test-results.txt
         try {
-            Files.write(Paths.get(filePath), log.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            Files.write(Paths.get(RESULTS_FILE_PATH), log.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             System.out.println("File written successfully");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());

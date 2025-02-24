@@ -55,51 +55,6 @@ Test End Time: 2025-02-23 18:19:01
 Test executed successfully.
 
 
-Test Name: AddProductToCartTest
-Test Start Time: 2025-02-23 18:25:12
-Clicked initial add-to-cart button.
-Set product quantity to 2.
-Clicked final add-to-cart button.
-Test End Time: 2025-02-23 18:25:16
-Test executed successfully.
-
-
-Test Name: AddProductToCartTest
-Test Start Time: 2025-02-23 18:29:42
-Clicked initial add-to-cart button.
-Set product quantity to 2.
-Clicked final add-to-cart button.
-Test End Time: 2025-02-23 18:29:45
-Test executed successfully.
-
-
-Test Name: AddProductToCartTest
-Test Start Time: 2025-02-23 18:36:40
-Clicked initial add-to-cart button.
-Set product quantity to 2.
-Clicked final add-to-cart button.
-Test End Time: 2025-02-23 18:36:44
-Test executed successfully.
-
-
-Test Name: AddProductToCartTest
-Test Start Time: 2025-02-23 18:38:49
-Clicked initial add-to-cart button.
-Set product quantity to 2.
-Clicked final add-to-cart button.
-Test End Time: 2025-02-23 18:38:53
-Test executed successfully.
-
-
-Test Name: AddProductToCartTest
-Test Start Time: 2025-02-23 18:44:46
-Clicked initial add-to-cart button.
-Set product quantity to 2.
-Clicked final add-to-cart button.
-Test End Time: 2025-02-23 18:44:51
-Test executed successfully.
-
-
 Test Name: RemoveProductFromToCartTest
 Test Start Time: 2025-02-23 18:47:13
 Clicked initial add-to-cart button.
@@ -108,4 +63,66 @@ Clicked menu button.
 Clicked delete-from-cart button.
 Clicked checkout button.
 Test End Time: 2025-02-23 18:47:27
+Test executed successfully.
+
+
+Test Name: AddProductToCartTest
+Test Start Time: 2025-02-23 19:05:02
+Clicked initial add-to-cart button.
+Set product quantity to 2.
+Clicked final add-to-cart button.
+Test End Time: 2025-02-23 19:05:07
+Test executed successfully.
+
+
+Test Name: RemoveProductFromToCartTest
+Test Start Time: 2025-02-23 19:06:30
+Clicked initial add-to-cart button.
+Clicked final add-to-cart button.
+Clicked menu button.
+Clicked delete-from-cart button.
+Clicked checkout button.
+Operation timed out: Expected condition failed: waiting for visibility of element located by By.cssSelector: #cart-total (tried for 2 second(s) with 500 milliseconds interval)
+Build info: version: '4.9.0', revision: 'd7057100a6'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.6'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 133.0.6943.127, chrome: {chromedriverVersion: 133.0.6943.0 (0155b8edb17ab..., userDataDir: C:\Users\CAMILO~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58586}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:58586/devtoo..., se:cdpVersion: 133.0.6943.127, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b207b1cc1664b5a8b237c2fe380d0787
+Test End Time: 2025-02-23 19:06:43
+Test executed successfully.
+
+
+Test Name: MaxQuantityTest
+Test Start Time: 2025-02-23 19:08:55
+Clicked initial add-to-cart button.
+Set product quantity to 10.
+Clicked final add-to-cart button.
+Attempted to set product quantity to 15. Attempt: 1.
+Attempted to set product quantity to 15. Attempt: 2.
+Attempted to set product quantity to 15. Attempt: 3.
+Attempted to set product quantity to 15. Attempt: 4.
+Attempted to set product quantity to 15. Attempt: 5.
+Test End Time: 2025-02-23 19:09:11
+Test executed successfully.
+
+
+Test Name: TotalCalculationTest
+Test Start Time: 2025-02-23 19:11:01
+Clicked initial add-to-cart button.
+Set product quantity to 3.
+Clicked final add-to-cart button.
+Clicked menu button.
+Total cart amount retrieved: £1200.00
+La cantidad ha sido verificada correctamente: £1200.00
+Clicked checkout button.
+Test End Time: 2025-02-23 19:11:06
+Test executed successfully.
+
+
+Test Name: Error500Test
+Test Start Time: 2025-02-23 19:12:18
+Navigated to /cause-server-error
+Clicked on navbar brand.
+Navigated to /cause-server-error again
+Test End Time: 2025-02-23 19:12:32
 Test executed successfully.
