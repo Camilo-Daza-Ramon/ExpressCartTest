@@ -1,0 +1,111 @@
+Test Name: AddProductToCartTest
+Test Start Time: 2025-02-23 18:13:44
+Clicked initial add-to-cart button.
+Set product quantity to 2.
+Clicked final add-to-cart button.
+Test End Time: 2025-02-23 18:13:48
+Test executed successfully.
+
+
+
+Test Name: RemoveProductFromToCartTest
+Test Start Time: 2025-02-23 18:16:44
+Clicked initial add-to-cart button.
+Clicked final add-to-cart button.
+Clicked menu button.
+Clicked delete-from-cart button.
+Clicked checkout button.
+Test End Time: 2025-02-23 18:16:57
+Test executed successfully.
+
+
+Test Name: MaxQuantityTest
+Test Start Time: 2025-02-23 18:17:20
+Clicked initial add-to-cart button.
+Set product quantity to 10.
+Clicked final add-to-cart button.
+Attempted to set product quantity to 15. Attempt: 1.
+Attempted to set product quantity to 15. Attempt: 2.
+Attempted to set product quantity to 15. Attempt: 3.
+Attempted to set product quantity to 15. Attempt: 4.
+Attempted to set product quantity to 15. Attempt: 5.
+Test End Time: 2025-02-23 18:17:36
+Test executed successfully.
+
+
+Test Name: TotalCalculationTest
+Test Start Time: 2025-02-23 18:18:22
+Clicked initial add-to-cart button.
+Set product quantity to 3.
+Clicked final add-to-cart button.
+Clicked menu button.
+Total cart amount retrieved: £1200.00
+La cantidad ha sido verificada correctamente: £1200.00
+Clicked checkout button.
+Test End Time: 2025-02-23 18:18:27
+Test executed successfully.
+
+
+Test Name: Error500Test
+Test Start Time: 2025-02-23 18:18:47
+Navigated to /cause-server-error
+Clicked on navbar brand.
+Navigated to /cause-server-error again
+Test End Time: 2025-02-23 18:19:01
+Test executed successfully.
+
+
+Test Name: AddProductToCartTest
+Test Start Time: 2025-02-23 18:25:12
+Clicked initial add-to-cart button.
+Set product quantity to 2.
+Clicked final add-to-cart button.
+Test End Time: 2025-02-23 18:25:16
+Test executed successfully.
+
+
+Test Name: AddProductToCartTest
+Test Start Time: 2025-02-23 18:29:42
+Clicked initial add-to-cart button.
+Set product quantity to 2.
+Clicked final add-to-cart button.
+Test End Time: 2025-02-23 18:29:45
+Test executed successfully.
+
+
+Test Name: AddProductToCartTest
+Test Start Time: 2025-02-23 18:36:40
+Clicked initial add-to-cart button.
+Set product quantity to 2.
+Clicked final add-to-cart button.
+Test End Time: 2025-02-23 18:36:44
+Test executed successfully.
+
+
+Test Name: AddProductToCartTest
+Test Start Time: 2025-02-23 18:38:49
+Clicked initial add-to-cart button.
+Set product quantity to 2.
+Clicked final add-to-cart button.
+Test End Time: 2025-02-23 18:38:53
+Test executed successfully.
+
+
+Test Name: AddProductToCartTest
+Test Start Time: 2025-02-23 18:44:46
+Clicked initial add-to-cart button.
+Set product quantity to 2.
+Clicked final add-to-cart button.
+Test End Time: 2025-02-23 18:44:51
+Test executed successfully.
+
+
+Test Name: RemoveProductFromToCartTest
+Test Start Time: 2025-02-23 18:47:13
+Clicked initial add-to-cart button.
+Clicked final add-to-cart button.
+Clicked menu button.
+Clicked delete-from-cart button.
+Clicked checkout button.
+Test End Time: 2025-02-23 18:47:27
+Test executed successfully.

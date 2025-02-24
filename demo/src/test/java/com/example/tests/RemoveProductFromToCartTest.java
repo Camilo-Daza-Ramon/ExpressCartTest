@@ -1,6 +1,12 @@
 package com.example.tests;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -27,43 +33,67 @@ public class RemoveProductFromToCartTest {
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         WebDriver driver = new ChromeDriver();
 
+        StringBuilder logBuilder = new StringBuilder();
+        LocalDateTime startTime = LocalDateTime.now();
+        logBuilder.append("\n\n");
+        logBuilder.append("Test Name: RemoveProductFromToCartTest\n");
+        logBuilder.append("Test Start Time: ").append(startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
+
         try {
             driver.get(BASE_URL);
-
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));  
             
             Thread.sleep(600);
-
             WebElement initialAddToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_TO_CART_INITIAL_SELECTOR)));
             initialAddToCartButton.click();
+            logBuilder.append("Clicked initial add-to-cart button.\n");
 
             Thread.sleep(2000);
-
             WebElement addToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_TO_CART_SELECTOR)));
             addToCartButton.click();
+            logBuilder.append("Clicked final add-to-cart button.\n");
 
             Thread.sleep(2000);
-
             WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(MENU_BUTTON_SELECTOR)));
             menuButton.click();
+            logBuilder.append("Clicked menu button.\n");
 
             Thread.sleep(2000);
-
             WebElement deleteFromCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(DELETE_FROM_CART_SELECTOR)));
             deleteFromCartButton.click();
+            logBuilder.append("Clicked delete-from-cart button.\n");
 
             Thread.sleep(2000);
             WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(CHECKOUT_BUTTON_SELECTOR)));
             checkoutButton.click();
+            logBuilder.append("Clicked checkout button.\n");
 
             WebElement cartTotal = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CART_TOTAL_SELECTOR)));
             String cartTotalText = cartTotal.getText();
             assertEquals("$0.00", cartTotalText);
+            logBuilder.append("Verified cart total is $0.00.\n");
+
+            Thread.sleep(600);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
+            logBuilder.append("Test execution error: ").append(e.getMessage()).append("\n");
         } finally {
+            LocalDateTime endTime = LocalDateTime.now();
+            logBuilder.append("Test End Time: ").append(endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
+            logBuilder.append("Test executed successfully.\n");
+            writeLogToFile(logBuilder.toString());
             driver.quit();
+        }
+    }
+
+    private void writeLogToFile(String log) {
+        String filePath = "test-results.txt"; // Cambiado a test-results.txt
+        try {
+            Files.write(Paths.get(filePath), log.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            System.out.println("File written successfully");
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
         }
     }
 }

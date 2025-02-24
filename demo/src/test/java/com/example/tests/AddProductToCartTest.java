@@ -1,7 +1,15 @@
 package com.example.tests;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,42 +25,81 @@ public class AddProductToCartTest {
     private static final String ADD_TO_CART_INITIAL_SELECTOR = ".btn.btn-primary.add-to-cart";
     private static final String ADD_TO_CART_SELECTOR = ".btn.btn-primary.btn-block.product-add-to-cart";
     private static final String PRODUCT_QUANTITY_SELECTOR = "#product_quantity";
-    
+    private static final String RESULTS_FILE_PATH = "test-results.txt";
+
+    private WebDriver driver;
+    private StringBuilder logBuilder;
+    private LocalDateTime startTime;
+
+    @BeforeEach
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
+        driver = new ChromeDriver();
+        logBuilder = new StringBuilder();
+    }
+
     @Test
     public void addProductToCart() {
-        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
-        WebDriver driver = new ChromeDriver();
-
         try {
-            driver.get(BASE_URL);
+            navigateToBaseUrl();
+            logStartTime();
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(300));
+            clickElement(ADD_TO_CART_INITIAL_SELECTOR, "Clicked initial add-to-cart button.");
+            setProductQuantity("2");
+            clickElement(ADD_TO_CART_SELECTOR, "Clicked final add-to-cart button.");
 
-            Thread.sleep(600);
+            logEndTime();
+            writeLogToFile(RESULTS_FILE_PATH);
 
-            WebElement initialAddToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_TO_CART_INITIAL_SELECTOR)));
-            initialAddToCartButton.click();
-
-            Thread.sleep(600);
-
-            WebElement quantityInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PRODUCT_QUANTITY_SELECTOR)));
-            quantityInput.clear();
-            quantityInput.sendKeys("2");
-
-            Thread.sleep(600);
-
-            WebElement addToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_TO_CART_SELECTOR)));
-            addToCartButton.click();
-
-            Thread.sleep(600);
-
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | IOException e) {
             e.printStackTrace();
-        } finally {
+        }
+    }
+
+    @AfterEach
+    public void tearDown() {
+        if (driver != null) {
             driver.quit();
         }
     }
-}
 
+    private void navigateToBaseUrl() {
+        driver.get(BASE_URL);
+    }
+
+    private void logStartTime() {
+        startTime = LocalDateTime.now();
+        logBuilder.append("\n\n"); // Agregar espacio de por medio entre registros
+        logBuilder.append("Test Name: AddProductToCartTest\n");
+        logBuilder.append("Test Start Time: ").append(startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
+    }
+
+    private void clickElement(String cssSelector, String logMessage) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(300));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
+        element.click();
+        logBuilder.append(logMessage).append("\n");
+        Thread.sleep(600);
+    }
+
+    private void setProductQuantity(String quantity) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(300));
+        WebElement quantityInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PRODUCT_QUANTITY_SELECTOR)));
+        quantityInput.clear();
+        quantityInput.sendKeys(quantity);
+        logBuilder.append("Set product quantity to ").append(quantity).append(".\n");
+        Thread.sleep(600);
+    }
+
+    private void logEndTime() {
+        LocalDateTime endTime = LocalDateTime.now();
+        logBuilder.append("Test End Time: ").append(endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
+        logBuilder.append("Test executed successfully.\n");
+    }
+
+    private void writeLogToFile(String filePath) throws IOException {
+        Files.write(Paths.get(filePath), logBuilder.toString().getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+}
 
 
