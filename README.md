@@ -58,7 +58,7 @@ Las pruebas automatizadas se encuentran en la carpeta **`/test`** y cubren las s
 
 6. Luego, abrir en el navegador **`http://localhost:1111/ `**
 
-##📄 Registro de Resultados de Pruebas
+## 📄 Registro de Resultados de Pruebas
 
 Los resultados de las pruebas se almacenan en el archivo **`test-results.txt `**, el cual registra los detalles de cada prueba ejecutada, incluyendo:
 
@@ -68,7 +68,7 @@ Los resultados de las pruebas se almacenan en el archivo **`test-results.txt `**
 
 Este archivo permite un monitoreo detallado del estado de las pruebas sin necesidad de ejecutar nuevamente el pipeline completo, facilitando el diagnóstico y mejora del sistema.
 
-##⚙️ Manejo y Registro de Errores
+## ⚙️ Manejo y Registro de Errores
 
 El sistema de pruebas cuenta con una estrategia para el manejo de errores, incluyendo:
 
@@ -77,7 +77,7 @@ El sistema de pruebas cuenta con una estrategia para el manejo de errores, inclu
 - Registro de errores: Se usa un sistema de logging para documentar fallos y permitir su depuración en un entorno de pruebas profesional.
 - Reporte y gestión de errores: Los errores críticos se reportan automáticamente a la herramienta de monitoreo utilizada en el entorno CI/CD.
 
-##📌 Conclusión
+## 📌 Conclusión
 Este proyecto proporciona una solución integral para la automatización de pruebas en la tienda CLOTH, asegurando estabilidad y calidad en cada despliegue. La integración con CI/CD permite una ejecución eficiente de los tests, y el archivo **`test-results.txt `** facilita el análisis de resultados. Con esta implementación, garantizamos un proceso de desarrollo más confiable y optimizado.
 
-####🚀 ¡Gracias por contribuir y mejorar este proyecto! 🎯
+#### 🚀 ¡Gracias por contribuir y mejorar este proyecto! 🎯
