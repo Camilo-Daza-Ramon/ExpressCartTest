@@ -58,7 +58,7 @@ Las pruebas automatizadas se encuentran en la carpeta **`/demo/src/test/java/com
 
 6. Luego, abrir en el navegador **`http://localhost:1111/ `**
 
-# Proyecto de Automatización de Pruebas
+# Automatización de Pruebas
 
 Este proyecto contiene pruebas automatizadas utilizando Selenium y JUnit para validar el comportamiento de una aplicación web.
 
