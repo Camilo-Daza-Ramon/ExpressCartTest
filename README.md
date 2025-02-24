@@ -58,6 +58,31 @@ Las pruebas automatizadas se encuentran en la carpeta **`/demo/src/test/java/com
 
 6. Luego, abrir en el navegador **`http://localhost:1111/ `**
 
+# Proyecto de Automatización de Pruebas
+
+Este proyecto contiene pruebas automatizadas utilizando Selenium y JUnit para validar el comportamiento de una aplicación web.
+
+## Estructura del Proyecto
+
+- `src/main/java` → Código fuente de la aplicación.
+- `src/test/java/com/example/tests` → Pruebas automatizadas.
+- `test-results.txt` → Archivo donde se almacenan los resultados de ejecución de las pruebas.
+
+## 🤖 Ejecución de las Pruebas
+
+Como los tests están diseñados para ejecutarse de manera local, se debe acceder a la ruta: **`.demo\src\test\java\com\example\tests`** y ejecutar cada test de manera individual desde el editor de código (preferiblemente **VSCode**). Para ello:
+
+1. Abrir **VSCode**.
+2. Navegar a la carpeta de pruebas.
+3. Ejecutar cada test manualmente usando las herramientas del editor.
+
+## Requisitos
+
+- Java 11 o superior.
+- Selenium WebDriver.
+- Google Chrome y ChromeDriver configurado.
+- JUnit 5.
+
 ## 📄 Registro de Resultados de Pruebas
 
 Los resultados de las pruebas se almacenan en el archivo **`test-results.txt `**, el cual registra los detalles de cada prueba ejecutada, incluyendo:
