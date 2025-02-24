@@ -15,12 +15,12 @@ Este repositorio contiene la automatización de pruebas y configuraciones de CI/
 - **`app.js`**: Archivo principal que configura y arranca la aplicación Express.
 - **`/bin`**: Contiene scripts de arranque del servidor.
 - **`/config`**: Archivos de configuración para la aplicación.
-- **`/demo`**: Datos o configuraciones de demostración.
+- **`/demo`**: ✨ Contiene las pruebas automatizadas para validar funcionalidades clave.
 - **`/lib`**: Módulos y bibliotecas reutilizables.
 - **`/locales`**: Archivos de localización e internacionalización.
 - **`/public`**: Archivos estáticos como CSS, JavaScript e imágenes.
 - **`/routes`**: Define las rutas y la lógica de negocio.
-- **`/test`**: ✨ Contiene las pruebas automatizadas para validar funcionalidades clave.
+- **`/test`**: Datos o configuraciones de demostración.
 - **`/views`**: Plantillas de vistas para la interfaz de usuario.
 - **`.github/workflows`**: Configuraciones de CI/CD con GitHub Actions.
 - **`Dockerfile` y `docker-compose.yml`**: Configuración para despliegue en contenedores Docker.
@@ -28,7 +28,7 @@ Este repositorio contiene la automatización de pruebas y configuraciones de CI/
 
 ## 🚀 Pruebas y Automatización
 
-Las pruebas automatizadas se encuentran en la carpeta **`/test`** y cubren las siguientes áreas:
+Las pruebas automatizadas se encuentran en la carpeta **`/demo/src/test/java/com/example/tests`** y cubren las siguientes áreas:
 
 - **Pruebas unitarias**: Validan la funcionalidad de los módulos individuales.
 - **Pruebas de integración**: Aseguran que los componentes trabajan juntos correctamente.

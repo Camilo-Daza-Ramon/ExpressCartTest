@@ -11,13 +11,14 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RemoveProductFromToCartTest {
+public class RemoveNegativeProductFromToCartTest {
 
     private static final String DRIVER_PATH = "C:\\Users\\CAMILO DAZA\\Desktop\\serverdrivers_selenium\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe";
     private static final String BASE_URL = "http://127.0.0.1:1111";
@@ -48,7 +49,7 @@ public class RemoveProductFromToCartTest {
 
         try {
             driver.get(BASE_URL);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));  
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));  
             
             Thread.sleep(600);
             WebElement initialAddToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_TO_CART_INITIAL_SELECTOR)));
@@ -65,10 +66,13 @@ public class RemoveProductFromToCartTest {
             menuButton.click();
             logBuilder.append("[SUCCESS] Clicked menu button.\n");
 
+            // Aquí se queda esperando el botón de eliminar sin hacer clic
             Thread.sleep(2000);
-            WebElement deleteFromCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(DELETE_FROM_CART_SELECTOR)));
-            deleteFromCartButton.click();
-            logBuilder.append("[SUCCESS] Clicked delete-from-cart button.\n");
+            logBuilder.append("[INFO] Waiting for delete-from-cart button...\n");
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(DELETE_FROM_CART_SELECTOR)));
+            logBuilder.append("[WARNING] The test is waiting indefinitely for the delete button!\n");
+
+            // No se hace clic en el botón de eliminar producto
 
             Thread.sleep(2000);
             WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(CHECKOUT_BUTTON_SELECTOR)));
@@ -82,14 +86,22 @@ public class RemoveProductFromToCartTest {
 
             Thread.sleep(600);
 
+        } catch (TimeoutException e) {
+            logBuilder.append("-----------------------------------------------------------\n");
+            logBuilder.append("ERROR: Timeout occurred while waiting for an element.\n");
+            logBuilder.append("Exception Details: ").append(e.getMessage()).append("\n");
+            logBuilder.append("-----------------------------------------------------------\n");
         } catch (Exception e) {
+            logBuilder.append("-----------------------------------------------------------\n");
+            logBuilder.append("ERROR: An unexpected error occurred.\n");
+            logBuilder.append("Exception Details: ").append(e.getMessage()).append("\n");
             logBuilder.append("-----------------------------------------------------------\n");
         } finally {
             LocalDateTime endTime = LocalDateTime.now();
             logBuilder.append("-----------------------------------------------------------\n");
             logBuilder.append("Execution End    : ").append(endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
             logBuilder.append("Total Duration   : ").append(Duration.between(startTime, endTime).getSeconds()).append(" seconds\n");
-            logBuilder.append("Test Result      : SUCCESS ✅\n");
+            logBuilder.append("Test Result      : FAILED ❌\n");
             logBuilder.append("-----------------------------------------------------------\n");
             writeLogToFile(logBuilder.toString());
             driver.quit();
@@ -105,3 +117,4 @@ public class RemoveProductFromToCartTest {
         }
     }
 }
+
